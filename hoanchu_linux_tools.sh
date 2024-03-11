@@ -63,6 +63,9 @@ show_menu() {
         7)
             clear_docker_log
             ;;
+        8)
+            install_netdata
+            ;;
         q)
             echo " ════════════════════ Xin chào và hẹn gặp lại ════════════════════"
             exit 0

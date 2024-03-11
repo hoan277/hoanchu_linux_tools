@@ -111,6 +111,8 @@ install_netdata() {
 install_ffmpeg_static() {
     echo "Đang cài đặt FFmpeg static và cuda..."
     echo ""
+    # wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz
+    # tar xvf ffmpeg-git-amd64-static.tar.xz
     git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
     cd nv-codec-headers && sudo make install && cd –
     git clone https://git.ffmpeg.org/ffmpeg.git

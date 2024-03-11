@@ -90,7 +90,7 @@ install_netdata() {
     # Check if NVIDIA driver is installed
     read -p "Bạn đã cài đặt NVIDIA driver chưa? (Y/N): " answer
     if [[ $answer == [Nn]* ]]; then
-        install_nvidia_driver()
+        install_nvidia_driver
     fi
 
     sudo apt-get install -y debian-archive-keyring libbson-1.0-0 libmongoc-1.0-0 libnetfilter-acct1 netdata netdata-ebpf-code-legacy netdata-plugin-apps netdata-plugin-chartsd netdata-plugin-debugfs netdata-plugin-ebpf netdata-plugin-go netdata-plugin-logs-management netdata-plugin-network-viewer netdata-plugin-nfacct netdata-plugin-perf netdata-plugin-pythond netdata-plugin-slabinfo netdata-plugin-systemd-journal

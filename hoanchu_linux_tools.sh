@@ -20,7 +20,7 @@ show_menu() {
     echo -e " ║  5. Dọn rác Linux                                                            ║"
     echo -e " ║  6. Cài đặt python + pip                                                     ║"
     echo -e " ║  7. Xóa log Docker                                                           ║"
-    echo -e " ║  8. .................................................                        ║"
+    echo -e " ║  8. Cài đặt Netdata                                                          ║"
     echo -e " ║  9. .................................................                        ║"
     echo -e " ║ 10. .................................................                        ║"
     echo -e " ╠════════════════════════════════ II. XÓA RÁC ═════════════════════════════════╣"
@@ -79,6 +79,28 @@ install_ffmpeg() {
     echo "Đang cài đặt FFmpeg gốc..."
     echo ""
     sudo apt-get install ffmpeg
+    show_menu
+}
+# Cài đặt Netdata
+install_netdata() {
+    echo "Đang cài đặt Netdata..."
+    echo ""
+    cd /tmp/
+
+    # Check if NVIDIA driver is installed
+    read -p "Bạn đã cài đặt NVIDIA driver chưa? (Y/N): " answer
+    if [[ $answer == [Nn]* ]]; then
+        install_nvidia_driver()
+    fi
+
+    sudo apt-get install -y debian-archive-keyring libbson-1.0-0 libmongoc-1.0-0 libnetfilter-acct1 netdata netdata-ebpf-code-legacy netdata-plugin-apps netdata-plugin-chartsd netdata-plugin-debugfs netdata-plugin-ebpf netdata-plugin-go netdata-plugin-logs-management netdata-plugin-network-viewer netdata-plugin-nfacct netdata-plugin-perf netdata-plugin-pythond netdata-plugin-slabinfo netdata-plugin-systemd-journal
+    pip install nvidia-ml-py
+    wget -O /tmp/netdata-kickstart.sh https://get.netdata.cloud/kickstart.sh && sh /tmp/netdata-kickstart.sh
+    git clone https://github.com/coraxx/netdata_nv_plugin --depth 1
+    sudo cp netdata_nv_plugin/nv.chart.py /usr/libexec/netdata/python.d/
+    sudo cp netdata_nv_plugin/python_modules/pynvml.py /usr/libexec/netdata/python.d/python_modules/
+    sudo cp netdata_nv_plugin/nv.conf /etc/netdata/python.d/
+    sudo service netdata restart
     show_menu
 }
 
